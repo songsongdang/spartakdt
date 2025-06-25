@@ -60,17 +60,71 @@ class ShoppingMall {
     print('장바구니에 상품이 담겼어요!');
   }
 
+  void removeFromCart() {
+    if (cart.isEmpty) {
+      print('장바구니에 담긴 상품이 없습니다.');
+      return;
+    }
+    stdout.write('장바구니에서 빼려는 상품 이름을 입력해 주세요\n');
+    String? nameInput = stdin.readLineSync();
+
+    if (nameInput == null || nameInput.trim().isEmpty) {
+      print('입력값이 올바르지 않아요!');
+      return;
+    }
+
+    Product? selectedProduct = cart.keys.firstWhereOrNull(
+      (p) => p.name == nameInput.trim(),
+    );
+
+    if (selectedProduct == null) {
+      print('장바구니에 해당 상품이 없습니다.');
+      return;
+    }
+
+    stdout.write('상품 개수를 입력해 주세요\n');
+    String? countInput = stdin.readLineSync();
+    int count;
+
+    try {
+      count = int.parse(countInput ?? '');
+    } catch (e) {
+      print('입력값이 올바르지 않아요!');
+      return;
+    }
+
+    int currentCount = cart[selectedProduct]!;
+    if (count <= 0) {
+      print('$count개보다 많은 개수의 상품만 뺄 수 있어요!');
+      return;
+    }
+    if (count > currentCount) {
+      print('장바구니에 담긴 개수보다 많이 뺄 수 없습니다.');
+      return;
+    }
+
+    // 상품 개수 차감
+    cart[selectedProduct] = currentCount - count;
+    totalPrice -= selectedProduct.price * count;
+    if (cart[selectedProduct] == 0) {
+      cart.remove(selectedProduct);
+    }
+    print('장바구니에서 상품을 $count개 뺐어요!');
+  }
+
   void showCartSummary() {
     if (cart.isEmpty || totalPrice == 0) {
       print('장바구니에 담긴 상품이 없습니다.');
       return;
     }
-    // 장바구니에 담긴 상품 이름을 리스트로 저장
-    List<String> productNames = cart.keys
-        .map((product) => product.name)
-        .toList();
-    String names = productNames.join(', ');
-    print('장바구니에 $names가 담겨있네요. 총 $totalPrice원 입니다!');
+    int total = 0;
+    print('[장바구니 내역]');
+    cart.forEach((product, count) {
+      int itemTotal = product.price * count;
+      total += itemTotal;
+      print('${product.name} - ${count}개, ${itemTotal}원');
+    });
+    print('상품 총 합: ${total}원');
   }
 
   void clearCart() {
@@ -101,7 +155,7 @@ void main() {
   while (running) {
     if (!awaitingExitConfirmation) {
       print(
-        '\n[1] 상품 목록 보기 / [2] 장바구니에 담기 / [3] 장바구니에 담긴 상품의 총 가격 보기 / [4] 프로그램 종료 / [6] 장바구니 초기화',
+        '\n[1] 상품 목록 보기 / [2] 장바구니에 담기 / [3] 장바구니에 담긴 상품의 총 가격 보기 / [4] 프로그램 종료 / [6] 장바구니에서 상품 빼기 / [7] 장바구니 완전 초기화',
       );
       stdout.write('> ');
       String? input = stdin.readLineSync();
@@ -122,6 +176,9 @@ void main() {
           awaitingExitConfirmation = true;
           break;
         case '6':
+          mall.removeFromCart();
+          break;
+        case '7':
           mall.clearCart();
           break;
         default:
