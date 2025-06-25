@@ -86,7 +86,7 @@ class ShoppingMall {
 
 void main() {
   List<Product> productList = [
-    Product('shirts', 45000),
+    Product('pants', 45000),
     Product('skirt', 30000),
     Product('shose', 35000),
     Product('shorts', 38000),
