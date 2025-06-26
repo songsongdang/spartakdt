@@ -207,7 +207,7 @@ void main() {
   while (running) {
     if (!awaitingExitConfirmation) {
       print(
-        '\n[1] 상품 목록 보기 / [2] 장바구니에 담기 / [3] 장바구니에 담긴 상품의 총 가격 보기 / [4] 프로그램 종료 / [6] 장바구니에서 상품 빼기 / [7] 장바구니 초기화',
+        '\n[1] 상품 목록 보기 / [2] 장바구니에 담기 / [3] 장바구니에 담긴 상품의 총 가격 보기 / [4] 프로그램 종료 / [6] 장바구니에서 상품 빼기 / [7] 장바구니 복구/초기화',
       );
       stdout.write('> ');
       String? input = stdin.readLineSync();
