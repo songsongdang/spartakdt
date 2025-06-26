@@ -2,8 +2,8 @@ import 'dart:io';
 import 'package:collection/collection.dart';
 
 class Product {
-  String name;
-  int price;
+  final String name;
+  final int price;
 
   Product(this.name, this.price);
 
@@ -20,8 +20,8 @@ class Product {
 }
 
 class ShoppingMall {
-  List<Product> products;
-  Map<Product, int> cart = {};
+  final List<Product> products;
+  final Map<Product, int> cart = {};
   int totalPrice = 0;
 
   /// 여러 번 삭제한 상품들을 누적 저장
