@@ -1,7 +1,19 @@
-<<<<<<< HEAD
-A sample command-line application with an entrypoint in `bin/`, library code
-in `lib/`, and example unit test in `test/`.
-=======
-# spartkdtssd
-스파르타 코딩클럽 dart 쇼핑몰 과제 제출
->>>>>>> 380121085671e5071019ba2da9b87c392d0bc0ed
+제출자: 송은경 
+
+스파르타 코딩클럽 앱개발 창업반 7기 dart 쇼핑몰 과제 코드 제출 (bin폴더의 test_1.dart폴더)
+
+[구현기능]
+1. 퍼플렉시티 활용해서 코드 초안 작성
+2. 에러 난 부분을 중점적으로 봐가면서 코드 수정
+3. 적용한 기능 
+    1. 상품 목록 보기
+    2. 장바구니 담기
+    3. 장바구니에 담긴 상품 총 가격 보기
+        1. 아이템-개수-아이템별 가격
+        2. 가격 총 합
+    4. 프로그램 종료
+        1. 종료 하시겠습니까? yes/no
+    6. 장바구니에서 상품 빼기
+        1. 상품명 
+        2. 빼고자 하는 상품 개수
+    7. 장바구니 완전 초기화
